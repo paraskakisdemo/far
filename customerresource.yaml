@@ -1,0 +1,203 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: "Fazio Customer Resource API"
+  description: API Intro
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+basePath: /
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+securityDefinitions:
+  OAuth2:
+    type: oauth2
+    flow: application
+    tokenUrl: https://example.com/oauth/token
+    scopes: {}
+paths:
+  /customer/{ID}:
+    x-summary: Single Customer Resource
+    x-description: >-
+        Customer Resource Text
+    parameters:
+    - name: ID
+      in: path
+      description: Unique ID of customer
+      required: true
+      type: string
+      x-example: '42'
+    get:
+      summary: Retrieve a Customer
+      description: >-
+        Retrieve a single Customer
+      responses:
+        200:
+          description: Successful Response
+          headers:
+            Location:
+              type: string
+              x-example: '42'
+          schema:
+              $ref: '#/definitions/Customer'
+          examples:
+            application/json; charset=utf-8:
+              ID: '42'
+              name: 'Emmanuel Paraskakis'
+              address:
+                street: '100 Oracle Pkwy'
+                locality: 'Redwood City'
+                region: 'CA'
+                postalCode: '94065'
+                country: 'USA' 
+              phone: '1-800-555-1212'
+    post:
+      description: >-
+        Create Customers 
+      summary: Create a New Customer
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CustomerRequest'
+      responses:
+        201:
+          description: ''
+          headers:
+            Location:
+              type: string
+              x-example: '42'
+          schema:
+            $ref: '#/definitions/Customer'
+          examples:
+            application/json; charset=utf-8:
+              ID: '42'
+              name: 'Emmanuel Paraskakis'
+              address:
+                street: '100 Oracle Pkwy'
+                locality: 'Redwood City'
+                region: 'CA'
+                postalCode: '94065'
+                country: 'USA' 
+              phone: '1-800-555-1212'
+    head:
+      summary: Head Customer
+      description: >-
+        Head Customer 
+      responses:
+        200:
+          description: >-
+            Head Customer
+    options:
+      summary: Options Customer
+      description: >-
+        Options Customer 
+      responses:
+        204:
+          description: >-
+            Options Customer
+          headers:
+            Allow:
+              type: string
+              x-example: 'POST,HEAD,GET,OPTIONS,PUT,DELETE'
+    put:
+      description: >-
+        Change a Customer
+      summary: Change a single Customer
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CustomerRequest'
+      responses:
+        201:
+          description: ''
+          headers:
+            Location:
+              type: string
+              x-example: '42'
+          schema:
+            $ref: '#/definitions/Customer'
+          examples:
+            application/json; charset=utf-8:
+              ID: '42'
+              name: 'Emmanuel Paraskakis'
+              address:
+                street: '100 Oracle Pkwy'
+                locality: 'Redwood City'
+                region: 'CA'
+                postalCode: '94065'
+                country: 'USA' 
+              phone: '1-800-555-1212'
+    delete:
+      description: >-
+        Delete Customer 
+      summary: Remove a single Customer
+      responses:
+        204:
+          description: ''
+definitions:
+  CustomerRequest:
+    title: CustomerRequest
+    type: object
+    properties:
+      name:
+        type: string
+      address:
+        $ref: '#/definitions/Address'
+      phone:
+        type: string
+    required:
+      - name
+      - address
+    example:
+        name: Emmanuel Paraskakis
+        address:
+          street: '100 Oracle Pkwy'
+          locality: 'Redwood City'
+          region: 'CA'
+          postalCode: '94065'
+          country: 'USA'  
+        phone: '1-800-555-1212'      
+  Customer:
+    title: Customer
+    allOf:
+    - properties:
+        ID:
+          type: string
+          example: '42'
+    - $ref: '#/definitions/CustomerRequest'
+    required:
+      - ID
+  Address:
+    title: Address
+    type: object
+    properties:
+      street:
+        type: string
+      locality:
+        type: string
+      region:
+        type: string
+      postalCode:
+        type: string
+      country:
+        type: string
+    required:
+      - street
+      - locality
+      - postalCode
+      - paymentToken
+      - country
+    example:
+      street: '100 Oracle Pkwy'
+      locality: 'Redwood City'
+      region: 'CA'
+      postalCode: '94065'
+      country: 'USA'
