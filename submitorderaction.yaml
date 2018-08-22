@@ -1,0 +1,190 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: "Fazio Submit Order Action API"
+  description: API Intro
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+basePath: /
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+- application/problem+json
+securityDefinitions:
+  OAuth2:
+    type: oauth2
+    flow: application
+    tokenUrl: https://example.com/oauth/token
+    scopes: {}
+paths:
+  /submitOrder:
+    x-summary: 'Order'
+    x-description: >-
+      Orders Collection Text
+    options:
+      description: >-
+        Options Order 
+      summary: Options Orders
+      responses:
+        204:
+          description: >-
+            Options Orders
+          headers:
+            Allow:
+              type: string
+              x-example: POST,OPTIONS
+    post:
+      description: >-
+        Submit Order 
+      summary: Create a New Order
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/OrderRequest'
+      responses:
+        201:
+          description: ''
+          headers:
+            Location:
+              type: string
+              x-example: '84'
+          schema:
+            $ref: '#/definitions/Order'
+          examples:
+            application/json; charset=utf-8:
+              ID: '84'
+              customerID: '42'
+              shippingAddress:
+                street: '100 Oracle Pkwy'
+                locality: 'Redwood City'
+                region: 'CA'
+                postalCode: '94065'
+                country: 'USA'
+              header:
+                paymentToken: '6e113782-a186-11e8-b659-529269fb1459'
+                shippingMethodID: '1'
+              detail:
+                - itemID: '21'
+                  quantity: 1
+        400:
+          description: Invalid Order Submission
+          schema:
+            $ref: '#/definitions/Problem'
+          examples:
+            application/problem+json; charset=utf-8:
+              type: 'https://example.net/duplicate-payment-token'
+              title: 'Duplicate Payment Token'
+              detail: 'Payment is associated with a previous order'
+definitions:
+  Address:
+    title: Address
+    type: object
+    properties:
+      street:
+        type: string
+      locality:
+        type: string
+      region:
+        type: string
+      postalCode:
+        type: string
+      country:
+        type: string
+    required:
+      - street
+      - locality
+      - postalCode
+      - paymentToken
+      - country
+    example:
+      street: '100 Oracle Pkwy'
+      locality: 'Redwood City'
+      region: 'CA'
+      postalCode: '94065'
+      country: 'USA'        
+  OrderRequest:
+    title: Order
+    type: object
+    properties:
+      customerID:
+        type: string
+      shippingAddress:
+          $ref: '#/definitions/Address'
+      header:
+        type: object
+        properties:
+          paymentToken:
+            type: string
+          shippingMethodID:
+            type: string
+      detail:
+        type: array
+        items:
+          $ref: '#/definitions/Item'
+    example:
+      ID: '84'
+      customerID: '42'
+      shippingAddress:
+        street: '100 Oracle Pkwy'
+        locality: 'Redwood City'
+        region: 'CA'
+        postalCode: '94065'
+        country: 'USA'
+      header:
+        paymentToken: '6e113782-a186-11e8-b659-529269fb1459'
+        paymentMethod: '1'
+      detail:
+        itemID: '21'
+        quantity: 1
+    required:
+      - customerID
+      - shippingAddress
+      - header
+      - paymentToken
+      - shippingMethodID
+      - detail
+  Order:
+    title: Order
+    allOf:
+    - properties:
+        ID:
+          type: string
+          example: '84'
+    - $ref: '#/definitions/OrderRequest'
+    required:
+      - ID
+  Item:
+    title: Item
+    type: object
+    properties:
+      itemID:
+        type: string
+        example: '21'
+      quantity:
+        type: number
+        example: 1
+    required:
+      - itemID
+      - quantity
+  Problem:
+    title: Problem
+    type: object
+    properties:
+      type:
+        type: string
+        example: 'https://example.net/duplicate-payment-token'
+      title:
+        type: string
+        example: Duplicate Payment Token
+      details:
+        type: string
+        example: Payment is associated with a previous order
+    required:
+      - type
+      - title
