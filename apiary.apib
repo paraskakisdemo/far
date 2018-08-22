@@ -1,0 +1,273 @@
+FORMAT: 1A
+
+# Forrester APIB
+
+API Intro
+
+## Customers Collection [/customers{?country,revenue}]
+
+Customers Collection text
+
++ Parameters
+    + country: USA (optional, string) - country text
+    + revenue: 1000 (optional, number) - revenue text
+
+### List All Customers [GET]
+
+GET collection text
+
++ Response 200 (application/json; charset=utf-8)
+
+        [
+            {
+                "ID": "42",
+                "name": "Emmanuel Paraskakis",
+                "address":
+                    {
+                        "street": "100 Oracle Pkwy",
+                        "locality": "Redwood City",
+                        "region": "CA",
+                        "postalCode": "94065",
+                        "country": "USA"
+                    },
+                "phone": "1-800-555-1212"
+            }
+        ]
+        
+### Metadata on Customers [HEAD]
+
+HEAD Collection text
+
++ Response 200
+
+### Customers Methods [OPTIONS]
+
+OPTIONS Collection Text
+
++ Response 200 (text/plain)
+
+        Allow: HEAD,GET,POST,OPTIONS
+    
+### Create a New Customer [POST]
+
+POST Collection Text
+
++ Request (application/json; charset=utf-8)
+
+            {
+                "name": "Emmanuel Paraskakis",
+                "address":
+                    {
+                        "street": "100 Oracle Pkwy",
+                        "locality": "Redwood City",
+                        "region": "CA",
+                        "postalCode": "94065",
+                        "country": "USA"
+                    },
+                "phone": "1-800-555-1212"
+            }
+
++ Response 201 (application/json; charset=utf-8)
+
+    + Headers
+
+            Location: /customers/42
+
+    + Body
+
+            {
+                "ID": "42",
+                "name": "Emmanuel Paraskakis",
+                "address":
+                    {
+                        "street": "100 Oracle Pkwy",
+                        "locality": "Redwood City",
+                        "region": "CA",
+                        "postalCode": "94065",
+                        "country": "USA"
+                    },
+                "phone": "1-800-555-1212"
+            }
+
+## Customer Resource [/customers/{ID}]
+
+Customer Resource text
+
++ Parameters
+
+    + ID: 42 (required, string) - Unique ID of a customer
+
+### Retrieve a single Customer [GET]
+
+Retrieve a single Customer Text
+
++ Response 200 (application/json; charset=utf-8)
+
+    + Headers
+
+            Location: /customers/2
+
+    + Body
+
+            {
+                "ID": "42",
+                "name": "Emmanuel Paraskakis",
+                "address":
+                    {
+                        "street": "100 Oracle Pkwy",
+                        "locality": "Redwood City",
+                        "region": "CA",
+                        "postalCode": "94065",
+                        "country": "USA"
+                    },
+                "phone": "1-800-555-1212"
+            }
+
+### Modify a single Customer [PUT]
+
+Change a single Customer Text
+
++ Request (application/json; charset=utf-8)
+
+            {
+                "name": "Emmanuel Paraskakis",
+                "address":
+                    {
+                        "street": "100 Oracle Pkwy",
+                        "locality": "Redwood City",
+                        "region": "CA",
+                        "postalCode": "94065",
+                        "country": "USA"
+                    },
+                "phone": "1-800-555-1212"
+            }
+
++ Response 200 (application/json; charset=utf-8)
+
+    + Headers
+
+            Location: /customers/42
+
+    + Body
+
+            {
+                "ID": "42",
+                "name": "Emmanuel Paraskakis",
+                "address":
+                    {
+                        "street": "100 Oracle Pkwy",
+                        "locality": "Redwood City",
+                        "region": "CA",
+                        "postalCode": "94065",
+                        "country": "USA"
+                    },
+                "phone": "1-800-555-1212"
+            }
+            
+### Remove a single Customer [DELETE]
+
+Remove Single Customer Text
+
++ Response 204
+            
+### Metadata on single Customer [HEAD]
+
+HEAD Customer text
+
++ Response 200
+
+    + Headers
+
+            Location: /customers/42
+
+### single Customer Methods [OPTIONS]
+
+OPTIONS Collection Text
+
++ Response 200 (text/plain)
+
+        Allow: HEAD,GET,OPTIONS,PUT, DELETE
+        
+## Orders [/orders{?validateOnly}]
+
+submitOrder Text
+
++ Parameters
+    
+    + validateOnly: yes (optional, string) - validation option text
+
+### Submit a new Order [POST]
+
+Create Order Text
+
++ Request (application/json; charset=utf-8)
+
+        {
+            "customerID": "42",
+            "shippingAddress":
+                {
+                    "street": "100 Oracle Pkwy",
+                    "locality": "Redwood City",
+                    "region": "CA",
+                    "postalCode": "94065",
+                    "country": "USA"
+                },
+            "header":
+                {
+                    "paymentToken": "6e113782-a186-11e8-b659-529269fb1459"
+                    "shippingMethodID": "1",
+                },
+            "detail":
+                    [
+                        {"itemID": "5", "quantity": 4},
+                        {"itemID": "11", "quantity": 2},
+                        {"itemID": "21", "quantity": 1}
+                    ]
+        }
+
++ Response 201 (application/json; charset=utf-8)
+    + Headers
+
+            Location: /customers/84
+
+    + Body
+
+            {
+                "ID": "84",
+                "customerID": "2",
+                "shippingAddress":
+                    {
+                        "street": "100 Oracle Pkwy",
+                        "locality": "Redwood City",
+                        "region": "CA",
+                        "postalCode": "94065",
+                        "country": "USA"
+                    },
+                "header":
+                    {
+                        "paymentToken": "6e113782-a186-11e8-b659-529269fb1459"
+                        "shippingMethodID": "1"
+                    },
+                "detail":
+                    [
+                        {"itemID": "2", "quantity": 1},
+                        {"itemID": "3", "quantity": 1},
+                        {"itemID": "7", "quantity": 1}
+                    ]
+            }
+
++ Response 400 (application/problem+json; charset=utf-8)
+
+        {
+           "type": "https://example.net/duplicate-payment-token",
+           "title": "Duplicate Payment Token",
+           "detail": "Payment is associated with a previous order"
+        }
+
+### Orders Methods [OPTIONS]
+
+OPTIONS Collection Text
+
++ Response 200 (text/plain)
+
+        Allow: POST,OPTIONS
