@@ -20,7 +20,7 @@ securityDefinitions:
     tokenUrl: https://example.com/oauth/token
     scopes: {}
 paths:
-  /customer/{ID}:
+  /customers/{ID}:
     x-summary: Single Customer Resource
     x-description: >-
         Customer Resource Text
