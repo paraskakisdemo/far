@@ -1,0 +1,138 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: "Fazio Customer List API"
+  description: API Intro
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+basePath: /
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+securityDefinitions:
+  OAuth2:
+    type: oauth2
+    flow: application
+    tokenUrl: https://example.com/oauth/token
+    scopes: {}
+paths:
+  /customers:
+    x-summary: Customers Collection
+    x-description: >-
+        Customers Collection Text
+    get:
+      description: >-
+        Get Customers
+      summary: List All Customers
+      parameters:
+        - name: country
+          in: query
+          description: Country Description
+          required: false
+          type: string
+          x-example: 'USA'
+        - name: revenue
+          in: query
+          description: Revenue Description
+          required: false
+          type: number
+          x-example: 1000
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Customer'
+          examples:
+            application/json; charset=utf-8:
+              - ID: '42'
+                name: 'Emmanuel Paraskakis'
+                address:
+                  street: '100 Oracle Pkwy'
+                  locality: 'Redwood City'
+                  region: 'CA'
+                  postalCode: '94065'
+                  country: 'USA' 
+                phone: '1-800-555-1212'
+    head:
+      description: >-
+        Head Customers
+      summary: Head Customers
+      responses:
+        200:
+          description: Succesful Response, must be 200 with no body
+    options:
+      description: >-
+        Options Customers
+      summary: Options Customers
+      responses:
+        204:
+          description: Succesful Response with no body
+          headers:
+            Allow:
+              type: string
+              x-example:  'HEAD,GET,OPTIONS'
+definitions:
+  CustomerRequest:
+    title: CustomerRequest
+    type: object
+    properties:
+      name:
+        type: string
+      address:
+        $ref: '#/definitions/Address'
+      phone:
+        type: string
+    required:
+      - name
+      - address
+    example:
+        name: Emmanuel Paraskakis
+        address:
+          street: '100 Oracle Pkwy'
+          locality: 'Redwood City'
+          region: 'CA'
+          postalCode: '94065'
+          country: 'USA'  
+        phone: '1-800-555-1212'      
+  Customer:
+    title: Customer
+    allOf:
+    - properties:
+        ID:
+          type: string
+          example: '42'
+    - $ref: '#/definitions/CustomerRequest'
+    required:
+      - ID
+  Address:
+    title: Address
+    type: object
+    properties:
+      street:
+        type: string
+      locality:
+        type: string
+      region:
+        type: string
+      postalCode:
+        type: string
+      country:
+        type: string
+    required:
+      - street
+      - locality
+      - postalCode
+      - paymentToken
+      - country
+    example:
+      street: '100 Oracle Pkwy'
+      locality: 'Redwood City'
+      region: 'CA'
+      postalCode: '94065'
+      country: 'USA'
