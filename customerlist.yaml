@@ -9,10 +9,6 @@ info:
 basePath: /
 schemes:
 - https
-consumes:
-- application/json
-produces:
-- application/json
 securityDefinitions:
   OAuth2:
     type: oauth2
@@ -28,6 +24,10 @@ paths:
       description: >-
         Get Customers
       summary: List All Customers
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
         - name: country
           in: query
@@ -76,7 +76,7 @@ paths:
           headers:
             Allow:
               type: string
-              x-example:  'HEAD,GET,OPTIONS'
+              x-example:  'GET, HEAD, OPTIONS'
 definitions:
   CustomerRequest:
     title: CustomerRequest
@@ -127,9 +127,7 @@ definitions:
     required:
       - street
       - locality
-      - postalCode
-      - paymentToken
-      - country
+      - posta      - country
     example:
       street: '100 Oracle Pkwy'
       locality: 'Redwood City'
