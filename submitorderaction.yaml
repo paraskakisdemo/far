@@ -19,7 +19,7 @@ paths:
   /submitOrder:
     x-summary: 'Order'
     x-description: >-
-      Orders Collection Text
+      Order Text
     options:
       description: >-
         Options Order 
@@ -127,7 +127,6 @@ definitions:
         items:
           $ref: '#/definitions/Item'
     example:
-      ID: '84'
       customerID: '42'
       shippingAddress:
         street: '100 Oracle Pkwy'
