@@ -6,17 +6,17 @@ info:
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
-basePath: /
+host: 129.146.94.206
+basePath: /orderaction/v1
 schemes:
 - https
 securityDefinitions:
-  OAuth2:
-    type: oauth2
-    flow: application
-    tokenUrl: https://example.com/oauth/token
-    scopes: {}
+  ApiKeyAuth:
+    type: apiKey
+    in: header
+    name: api-key
 paths:
-  /submitOrder:
+  /submitorder:
     x-summary: 'Order'
     x-description: >-
       Order Text
