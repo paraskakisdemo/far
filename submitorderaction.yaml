@@ -41,6 +41,12 @@ paths:
       produces:
         - application/json
       parameters:
+        - name: validateOnly
+          in: query
+          description: Validate - do not submit
+          required: false
+          type: string
+          x-example: 'yes'
         - name: body
           in: body
           required: true
