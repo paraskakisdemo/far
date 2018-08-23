@@ -127,7 +127,8 @@ definitions:
     required:
       - street
       - locality
-      - posta      - country
+      - postalCode
+      - country
     example:
       street: '100 Oracle Pkwy'
       locality: 'Redwood City'
