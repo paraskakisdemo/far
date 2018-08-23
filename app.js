@@ -2,7 +2,7 @@ var express = require('express')
 var app = express()
 var port = process.env.PORT || 3000
 var customer = {
-        "id": "42",
+        "ID": "42",
         "name": "Emmanuel Paraskakis",
         "address": {
             "street": "100 Oracle Pkwy",
@@ -14,7 +14,7 @@ var customer = {
         "phone": "1-800-555-1212"
     }
 var order = {
-        "id": "84",
+        "ID": "84",
         "customerID": "42",
         "shippingAddress": {
             "street": "100 Oracle Pkwy",
@@ -45,7 +45,7 @@ var order = {
 
 var customers = [
     {
-        "id": "42",
+        "ID": "42",
         "name": "Emmanuel Paraskakis",
         "address": {
             "street": "100 Oracle Pkwy",
@@ -57,7 +57,7 @@ var customers = [
         "phone": "1-800-555-1212"
     },
     {
-        "id": "84",
+        "ID": "84",
         "name": "Robert Wunderlich",
         "address": {
             "street": "100 Oracle Pkwy",
@@ -69,7 +69,7 @@ var customers = [
         "phone": "1-800-555-1212"
     },
     {
-        "id": "168",
+        "ID": "168",
         "name": "Vikas Anand",
         "address": {
             "street": "100 Oracle Pkwy",
