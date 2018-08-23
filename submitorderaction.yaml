@@ -137,8 +137,8 @@ definitions:
         paymentToken: '6e113782-a186-11e8-b659-529269fb1459'
         paymentMethod: '1'
       detail:
-        itemID: '21'
-        quantity: 1
+        - itemID: '21'
+          quantity: 1
     required:
       - customerID
       - shippingAddress
