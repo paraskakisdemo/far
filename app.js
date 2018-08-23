@@ -84,7 +84,7 @@ var customers = [
 
 //root
 app.get('/', function (req, res) {
-  res.send('Welcome to the FAS API!')
+  res.send('Welcome to the FAR API!')
 })
 
 //customer
@@ -105,7 +105,7 @@ app.head('/customer/:id', function (req, res) {
 })
 
 app.options('/customer/:id', function (req, res) {
-    res.set('Allow', 'GET,POST,PUT,DELETE,HEAD,OPTIONS')
+    res.set('Allow', 'GET, POST, PUT, DELETE, HEAD, OPTIONS')
     res.status(204)
     res.end()
 })
@@ -143,7 +143,7 @@ app.post('/submitorder', function (req, res) {
 })
 
 app.options('/submitorder', function (req, res) {
-    res.set('Allow', 'POST,OPTIONS')
+    res.set('Allow', 'POST, OPTIONS')
     res.status(204)
     res.end()
   })
