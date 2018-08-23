@@ -143,8 +143,6 @@ definitions:
       - customerID
       - shippingAddress
       - header
-      - paymentToken
-      - shippingMethodID
       - detail
   Order:
     title: Order
