@@ -128,7 +128,7 @@ paths:
           schema:
             $ref: '#/definitions/CustomerRequest'
       responses:
-        201:
+        200:
           description: ''
           headers:
             Location:
