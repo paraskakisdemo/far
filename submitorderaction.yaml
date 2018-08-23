@@ -9,11 +9,6 @@ info:
 basePath: /
 schemes:
 - https
-consumes:
-- application/json
-produces:
-- application/json
-- application/problem+json
 securityDefinitions:
   OAuth2:
     type: oauth2
@@ -41,6 +36,10 @@ paths:
       description: >-
         Submit Order 
       summary: Create a New Order
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
         - name: body
           in: body
@@ -53,7 +52,7 @@ paths:
           headers:
             Location:
               type: string
-              x-example: '84'
+              x-example: '/submitorder/84'
           schema:
             $ref: '#/definitions/Order'
           examples:
