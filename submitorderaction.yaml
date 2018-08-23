@@ -46,7 +46,7 @@ paths:
           description: Validate - do not submit
           required: false
           type: string
-          x-example: 'yes'
+          x-example: 'no'
         - name: body
           in: body
           required: true
