@@ -9,10 +9,6 @@ info:
 basePath: /
 schemes:
 - https
-consumes:
-- application/json
-produces:
-- application/json
 securityDefinitions:
   OAuth2:
     type: oauth2
@@ -33,6 +29,10 @@ paths:
       x-example: '42'
     get:
       summary: Retrieve a Customer
+      consumes:
+      - application/json
+      produces:
+      - application/json
       description: >-
         Retrieve a single Customer
       responses:
@@ -41,7 +41,7 @@ paths:
           headers:
             Location:
               type: string
-              x-example: '42'
+              x-example: '/customer/42'
           schema:
               $ref: '#/definitions/Customer'
           examples:
@@ -59,6 +59,10 @@ paths:
       description: >-
         Create Customers 
       summary: Create a New Customer
+      consumes:
+      - application/json
+      produces:
+      - application/json
       parameters:
         - name: body
           in: body
@@ -71,7 +75,7 @@ paths:
           headers:
             Location:
               type: string
-              x-example: '42'
+              x-example: '/customer/42'
           schema:
             $ref: '#/definitions/Customer'
           examples:
@@ -93,6 +97,10 @@ paths:
         200:
           description: >-
             Head Customer
+          headers:
+            Location:
+              type: string
+              x-example: '/customer/42'
     options:
       summary: Options Customer
       description: >-
@@ -104,11 +112,15 @@ paths:
           headers:
             Allow:
               type: string
-              x-example: 'POST,HEAD,GET,OPTIONS,PUT,DELETE'
+              x-example: 'GET, POST, PUT, DELETE, HEAD, OPTIONS'
     put:
       description: >-
         Change a Customer
       summary: Change a single Customer
+      consumes:
+      - application/json
+      produces:
+      - application/json
       parameters:
         - name: body
           in: body
@@ -121,7 +133,7 @@ paths:
           headers:
             Location:
               type: string
-              x-example: '42'
+              x-example: 'customer/42'
           schema:
             $ref: '#/definitions/Customer'
           examples:
