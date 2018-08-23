@@ -130,7 +130,7 @@ app.head('/customers', function (req, res) {
 })
 
 app.options('/customers', function (req, res) {
-    res.set('Allow', 'GET,HEAD,OPTIONS')
+    res.set('Allow', 'GET, HEAD, OPTIONS')
     res.status(204)
     res.end()
 })
@@ -138,6 +138,7 @@ app.options('/customers', function (req, res) {
 //submitorder
 app.post('/submitorder', function (req, res) {
     res.set('Location', '/submitorder/84')
+    res.status(201)
   res.json(order)
 })
 
