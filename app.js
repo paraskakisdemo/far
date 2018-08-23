@@ -70,17 +70,18 @@ var beers = [
 ]
 
 app.get('/', function (req, res) {
-  res.send('Welcome to the Chatbot API!')
+  res.send('Welcome to the FAS API!')
 })
 
-app.get('/seats', function (req, res) {
+app.get('/customer', function (req, res) {
   res.json(seats)
 })
 
-app.get('/beer', function (req, res) {
+app.get('/customers', function (req, res) {
   res.json(beers)
 })
 
+
 app.listen(port, function () {
-  console.log('Chatbot API listening on port ' + port)
+  console.log('FAR API listening on port ' + port)
 })
