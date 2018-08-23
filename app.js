@@ -1,78 +1,86 @@
 var express = require('express')
 var app = express()
 var port = process.env.PORT || 3000
-var customer = [
+var customer = {
+        "id": "42",
+        "name": "Emmanuel Paraskakis",
+        "address": {
+            "street": "100 Oracle Pkwy",
+            "locality": "Redwood City",
+            "region": "CA",
+            "postalCode": "94065",
+            "country": "USA"
+        },
+        "phone": "1-800-555-1212"
+    }
+var order = {
+        "id": "84",
+        "customerID": "42",
+        "shippingAddress": {
+            "street": "100 Oracle Pkwy",
+            "locality": "Redwood City",
+            "region": "CA",
+            "postalCode": "94065",
+            "country": "USA"
+        },
+        "header": {
+            "paymentToken": "6e113782-a186-11e8-b659-529269fb1459",
+            "shippingMethodID": "1"
+        },
+        "detail": [
+            {
+                "itemID": "21",
+                "quantity": 1
+            },
+            {
+                "itemID": "11",
+                "quantity": 2
+            },
+            {
+                "itemID": "6",
+                "quantity": 4
+            }
+        ]
+    }
+
+var customers = [
     {
-        "section": "Section 115",
-        "row": "3",
-        "available": true,
-        "price": 299,
-        "link": {
-            "rel": "image",
-            "href": "https://publicdocs-corp.documents.us2.oraclecloud.com/documents/link/LF7206C60A9212DA72124CA9F6C3FF17C1177E4725F3/file/D2BA28E8C506DC0CDA4F9C14F6C3FF17C1177E4725F3?allowInterrupt=1"
-        }
+        "id": "42",
+        "name": "Emmanuel Paraskakis",
+        "address": {
+            "street": "100 Oracle Pkwy",
+            "locality": "Redwood City",
+            "region": "CA",
+            "postalCode": "94065",
+            "country": "USA"
+        },
+        "phone": "1-800-555-1212"
     },
     {
-        "section": "Section 216",
-        "row": "7",
-        "available": true,
-        "price": 219,
-        "link": {
-            "rel": "image",
-            "href": "https://publicdocs-corp.documents.us2.oraclecloud.com/documents/link/LF7206C60A9212DA72124CA9F6C3FF17C1177E4725F3/file/D2BA28E8C506DC0CDA4F9C14F6C3FF17C1177E4725F3?allowInterrupt=1"
-        }
+        "id": "84",
+        "name": "Robert Wunderlich",
+        "address": {
+            "street": "100 Oracle Pkwy",
+            "locality": "Redwood City",
+            "region": "CA",
+            "postalCode": "94065",
+            "country": "USA"
+        },
+        "phone": "1-800-555-1212"
     },
     {
-        "section": "Section 229",
-        "row": "12",
-        "available": true,
-        "price": 146,
-        "link": {
-            "rel": "image",
-            "href": "https://publicdocs-corp.documents.us2.oraclecloud.com/documents/link/LF7206C60A9212DA72124CA9F6C3FF17C1177E4725F3/file/DF03AD812F69F02A82C04FC2F6C3FF17C1177E4725F3?allowInterrupt=1"
-        }
+        "id": "168",
+        "name": "Vikas Anand",
+        "address": {
+            "street": "100 Oracle Pkwy",
+            "locality": "Redwood City",
+            "region": "CA",
+            "postalCode": "94065",
+            "country": "USA"
+        },
+        "phone": "1-800-555-1212"
     }
 ]
-
-var order = [
-    {
-        "name": "Guiness",
-        "description": "No preservatives or additives. 100% natural, ingredients create a unique flavour",
-        "link": {
-            "rel": "image",
-            "href": "https://publicdocs-corp.documents.us2.oraclecloud.com/documents/link/LF7206C60A9212DA72124CA9F6C3FF17C1177E4725F3/file/D2680B911AEB03B8C3B6EF22F6C3FF17C1177E4725F3?RevLabel=LATEST&allowInterrupt=1"
-        }
-    },
-    {
-        "name": "Pilsner Urquell",
-        "description": "World's first pilsner. Grainy malt center with a light touch of butter flavor",
-        "link": {
-            "rel": "image",
-            "href": "https://publicdocs-corp.documents.us2.oraclecloud.com/documents/link/LF7206C60A9212DA72124CA9F6C3FF17C1177E4725F3/file/D38CC50D762E50731F505711F6C3FF17C1177E4725F3?RevLabel=LATEST&allowInterrupt=1"
-        }
-    },
-    {
-        "name": "Schlappe-Seppel",
-        "description": "Smooth bitter, tangy, fruity, full-bodied - more than a beer, it's an attitude",
-        "link": {
-            "rel": "image",
-            "href": "https://publicdocs-corp.documents.us2.oraclecloud.com/documents/link/LF7206C60A9212DA72124CA9F6C3FF17C1177E4725F3/file/DFE12285193404897A6331F4F6C3FF17C1177E4725F3?RevLabel=LATEST?allowInterrupt=1"
-        }
-    },
-                {
-        "name": "Heineken",
-        "description": "Crisp, clean and refreshing, this popular beer is a classic European style Lager",
-        "link": {
-            "rel": "image",
-            "href": "https://publicdocs-corp.documents.us2.oraclecloud.com/documents/link/LF7206C60A9212DA72124CA9F6C3FF17C1177E4725F3/file/DE79A523EC91B0687D5AA852F6C3FF17C1177E4725F3?dRevLabel=LATEST&allowInterrupt=1"
-        }
-    }
-]
-
-var customers = []
-
-var empty = {}
-
 
 //root
 app.get('/', function (req, res) {
@@ -80,50 +88,63 @@ app.get('/', function (req, res) {
 })
 
 //customer
-app.get('/customer', function (req, res) {
-  res.json(customer)
-})
-
-app.post('/customer', function (req, res) {
+app.get('/customer/:id', function (req, res) {
+    res.set('Location', '/customer/42')    
     res.json(customer)
 })
 
-app.head('/customer', function (req, res) {
-res.json(empty)
+app.post('/customer/:id', function (req, res) {
+    res.set('Location', '/customer/42')
+    res.status(201)
+    res.json(customer)
 })
 
-app.options('/customer', function (req, res) {
-res.json(empty)
+app.head('/customer/:id', function (req, res) {
+    res.set('Location', '/customer/42')
+    res.end()
 })
 
-app.put('/customer', function (req, res) {
-res.json(customer)
+app.options('/customer/:id', function (req, res) {
+    res.set('Allow', 'GET,POST,PUT,DELETE,HEAD,OPTIONS')
+    res.status(204)
+    res.end()
 })
 
-app.delete('/customer', function (req, res) {
-res.json(empty)
+app.put('/customer/:id', function (req, res) {
+    res.set('Location', '/customer/42')
+    res.json(customer)
+})
+
+app.delete('/customer/:id', function (req, res) {
+    res.status(204)
+    res.end()
 })
 
 //customers
 app.get('/customers', function (req, res) {
-res.json(customers)
+    res.json(customers)
 })
 
 app.head('/customers', function (req, res) {
-res.json(empty)
+    res.end()
 })
 
 app.options('/customers', function (req, res) {
-res.json(empty)
+    res.set('Allow', 'GET,HEAD,OPTIONS')
+    res.status(204)
+    res.end()
 })
 
 //submitorder
 app.post('/submitorder', function (req, res) {
+    res.set('Location', '/submitorder/84')
   res.json(order)
 })
 
 app.options('/submitorder', function (req, res) {
-    res.json(empty)
+    res.set('Allow', 'POST,OPTIONS')
+    res.status(204)
+    res.end()
   })
 
 app.listen(port, function () {
