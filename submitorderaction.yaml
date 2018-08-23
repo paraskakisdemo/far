@@ -99,7 +99,6 @@ definitions:
       - street
       - locality
       - postalCode
-      - paymentToken
       - country
     example:
       street: '100 Oracle Pkwy'
