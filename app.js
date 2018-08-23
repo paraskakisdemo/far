@@ -1,7 +1,7 @@
 var express = require('express')
 var app = express()
 var port = process.env.PORT || 3000
-var seats = [
+var customer = [
     {
         "section": "Section 115",
         "row": "3",
@@ -34,7 +34,7 @@ var seats = [
     }
 ]
 
-var beers = [
+var order = [
     {
         "name": "Guiness",
         "description": "No preservatives or additives. 100% natural, ingredients create a unique flavour",
@@ -69,6 +69,11 @@ var beers = [
     }
 ]
 
+var customers = []
+
+var empty = {}
+
+
 //root
 app.get('/', function (req, res) {
   res.send('Welcome to the FAS API!')
@@ -76,49 +81,49 @@ app.get('/', function (req, res) {
 
 //customer
 app.get('/customer', function (req, res) {
-  res.json(seats)
+  res.json(customer)
 })
 
 app.post('/customer', function (req, res) {
-    res.json(seats)
+    res.json(customer)
 })
 
 app.head('/customer', function (req, res) {
-res.json(seats)
+res.json(empty)
 })
 
 app.options('/customer', function (req, res) {
-res.json(seats)
+res.json(empty)
 })
 
 app.put('/customer', function (req, res) {
-res.json(seats)
+res.json(customer)
 })
 
 app.delete('/customer', function (req, res) {
-res.json(seats)
+res.json(empty)
 })
 
 //customers
 app.get('/customers', function (req, res) {
-res.json(seats)
+res.json(customers)
 })
 
 app.head('/customers', function (req, res) {
-res.json(seats)
+res.json(empty)
 })
 
 app.options('/customers', function (req, res) {
-res.json(seats)
+res.json(empty)
 })
 
 //submitorder
 app.post('/submitorder', function (req, res) {
-  res.json(beers)
+  res.json(order)
 })
 
 app.options('/submitorder', function (req, res) {
-    res.json(beers)
+    res.json(empty)
   })
 
 app.listen(port, function () {
