@@ -69,18 +69,57 @@ var beers = [
     }
 ]
 
+//root
 app.get('/', function (req, res) {
   res.send('Welcome to the FAS API!')
 })
 
+//customer
 app.get('/customer', function (req, res) {
   res.json(seats)
 })
 
+app.post('/customer', function (req, res) {
+    res.json(seats)
+})
+
+app.head('/customer', function (req, res) {
+res.json(seats)
+})
+
+app.options('/customer', function (req, res) {
+res.json(seats)
+})
+
+app.put('/customer', function (req, res) {
+res.json(seats)
+})
+
+app.delete('/customer', function (req, res) {
+res.json(seats)
+})
+
+//customers
 app.get('/customers', function (req, res) {
+res.json(seats)
+})
+
+app.head('/customers', function (req, res) {
+res.json(seats)
+})
+
+app.options('/customers', function (req, res) {
+res.json(seats)
+})
+
+//submitorder
+app.post('/submitorder', function (req, res) {
   res.json(beers)
 })
 
+app.options('/submitorder', function (req, res) {
+    res.json(beers)
+  })
 
 app.listen(port, function () {
   console.log('FAR API listening on port ' + port)
