@@ -93,29 +93,24 @@ app.get('/customers/:id', function (req, res) {
     res.json(customer)
 })
 
-app.post('/customer/:id', function (req, res) {
-    res.set('Location', '/customer/42')
-    res.status(201)
-    res.json(customer)
-})
 
-app.head('/customer/:id', function (req, res) {
+app.head('/customers/:id', function (req, res) {
     res.set('Location', '/customer/42')
     res.end()
 })
 
-app.options('/customer/:id', function (req, res) {
-    res.set('Allow', 'GET, POST, PUT, DELETE, HEAD, OPTIONS')
+app.options('/customers/:id', function (req, res) {
+    res.set('Allow', 'GET, PUT, DELETE, HEAD, OPTIONS')
     res.status(204)
     res.end()
 })
 
-app.put('/customer/:id', function (req, res) {
+app.put('/customers/:id', function (req, res) {
     res.set('Location', '/customer/42')
     res.json(customer)
 })
 
-app.delete('/customer/:id', function (req, res) {
+app.delete('/customers/:id', function (req, res) {
     res.status(204)
     res.end()
 })
@@ -130,19 +125,25 @@ app.head('/customers', function (req, res) {
 })
 
 app.options('/customers', function (req, res) {
-    res.set('Allow', 'GET, HEAD, OPTIONS')
+    res.set('Allow', 'GET, HEAD, OPTIONS, POST')
     res.status(204)
     res.end()
 })
 
+app.post('/customers', function (req, res) {
+    res.set('Location', '/customer/42')
+    res.status(201)
+    res.json(customer)
+})
+
 //submitorder
-app.post('/submitorder', function (req, res) {
+app.post('/orders', function (req, res) {
     res.set('Location', '/submitorder/84')
     res.status(201)
   res.json(order)
 })
 
-app.options('/submitorder', function (req, res) {
+app.options('/orders', function (req, res) {
     res.set('Allow', 'POST, OPTIONS')
     res.status(204)
     res.end()
