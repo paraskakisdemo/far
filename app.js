@@ -88,7 +88,7 @@ app.get('/', function (req, res) {
 })
 
 //customer
-app.get('/customer/:id', function (req, res) {
+app.get('/customers/:id', function (req, res) {
     res.set('Location', '/customer/42')    
     res.json(customer)
 })
